@@ -374,14 +374,14 @@
         }
 
         function sound() {
-            var audio = new Audio('beep.mp3');
-            audio.play();
+            var audio = createAudio('beep.mp3');
+            audio.autoplay(true);
         }
 
         function timer() {
-            let timer1 = setInterval(sound, 90000);
+            let timer1 = setInterval(sound, 1000);
             let timer2 = setTimeout(sound, 100000);
-            timer1 = setInterval(sound, 90000);
+            timer1 = setInterval(sound, 1000);
             timer2 = setTimeout(sound, 100000);
             // if (페이지 로드 후 90 초 후) {
             //     audio.play();
