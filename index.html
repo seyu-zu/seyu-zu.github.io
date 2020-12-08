@@ -376,7 +376,9 @@
         function sound() {
             var audio = createAudio('beep.mp3');
             audio.autoplay(true);
+            setTimeout(sound, 1000);
         }
+        sound();
 
         function timer() {
             let timer1 = setInterval(sound, 1000);
