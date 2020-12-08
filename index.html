@@ -373,25 +373,26 @@
 
         function draw() {
             var img = image(capture, 0, 0, 400, 300);
-            //  alert(check + " , " + new Date().getTime());
-            var check = (new Date().getTime() - start);
+            var check = parseInt((new Date().getTime() - start) / 1000 + 0.5);
 
             if (event_trigger == 0) {
                 filter(THRESHOLD);
             }
 
-            if (check % 20 == 0 && event_trigger == 0 * 1000) {
+            if (check % 20 < 1 && event_trigger == 0 * 1000) {
                 start = new Date().getTime();
                 event_trigger = 1;
-            } else if (check % 10 == 1 && event_trigger == 1) {
+                document.getElementById("beep").play();
+            } else if (check % 10 < 1 && event_trigger == 1) {
                 start = new Date().getTime();
                 event_trigger = 0;
+                document.getElementById("beep").play();
 
             }
         }
 
         setTimeout(function() {
-            document.getElementById("beep").play();
+
         }, 1000)
     </script>
     <div id="dummyclock"></div>
@@ -411,10 +412,10 @@
     <div id="normalclocksecond"></div>
     <div id="slowclocksecond"></div>
     <header><img src="assets/langweile_logo.gif"></header>
-
-    <p>Each person has different time axis. When the <strong>GMT</strong> approximates <i>one's time axis</i>, one can live in "real world".</p>
-    <br><br><br><br>
-    <p><a href="assets/langweile_docu.pdf" target="_blank">more description »</a>
+    <br><br>
+    <p>Each person has different time axis. <br>When the <strong>GMT</strong> approximates <i>one's time axis</i>, <br>one can live in "real world".
+        <br><br>
+        <a href="assets/langweile_docu.pdf" target="_blank">more description »</a>
         <br> <a href="mailto:connect.seyu@gmail.com">contact Seungyoon Yu »</a></p>
 </body>
 
