@@ -373,6 +373,23 @@
             }
         }
 
+        function sound() {
+            var audio = new Audio('beep.mp3');
+            audio.play();
+        }
+
+        function timer() {
+            let timer1 = setInterval(sound, 90000);
+            let timer2 = setTimeout(sound, 100000);
+            timer1 = setInterval(sound, 90000);
+            timer2 = setTimeout(sound, 100000);
+            // if (페이지 로드 후 90 초 후) {
+            //     audio.play();
+            // }
+            // if (페이지 로드 후 90 초 후 + 지연10초) {
+            //     timer2 = window.setTimeout(audio.play(), 100000)
+            // }
+        }
         //  function dimension() {
         //     draw;
         //     filter(THRESHOLD);
