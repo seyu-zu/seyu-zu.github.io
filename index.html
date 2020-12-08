@@ -1,32 +1,415 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <!-- MADE BY SEUNGYOON YU-->
+<!-- WORKS ONLY IN SAFARI, MAC-->
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>GZ</title>
-    <link rel="stylesheet" href="/assets/main.css" />
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap');
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Langweile</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.min.js"></script>
+    <style type="text/css">
+        /*Screensizectrl*/
+        /* 
+        @media (max-width:1426px) {
+            body {
+                background: blue;
+            }
+            header {
+                font-size: 35px !important;
+                min-width: 90%;
+            }
+            p {
+                font-size: 15px !important;
+                margin-right: 5% !important;
+            }
+            #slowclock {
+                margin-left: 35% !important;
+            }
+        }
+        
+        @media (max-width:1095px) {
+            body {
+                background: greenyellow;
+            }
+            header {
+                font-size: 25px !important;
+            }
+            p {
+                font-size: 12px !important;
+                margin-right: 5% !important;
+            }
+            #slowclock {
+                margin-left: 50% !important;
+            }
+        }
+        */
+        /*Style and layout*/
+        
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@700&family=Spectral:wght@300&display=swap');
+        html,
         body {
-            text-align: center;
-            margin-left: 5%;
-            margin-top: 3%;
+            margin: 0;
+            padding: 1%;
+            -ms-overflow-style: none;
+        }
+        
+         ::-webkit-scrollbar {
+            display: none;
+        }
+        
+        canvas {
+            display: inline;
+            float: left;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 350px;
+            height: 350px;
+            z-index: -1;
+            border-radius: 50%;
+        }
+        
+        a {
+            color: #FFAAAA;
+            text-decoration: none;
+        }
+        
+        a:visited {
+            color: #FFAAAA;
+        }
+        
+        a:hover {
+            color: #AAAAFF;
+            text-decoration: none;
+        }
+        
+        a:focus {
+            color: #AAAAFF;
+        }
+        
+        a:active {
+            color: #AAAAFF;
+        }
+        
+        header {
+            color: #000000;
+            text-align: right;
+            font-size: 50px;
+            margin-left: 70%;
+            margin-top: auto;
             margin-right: 5%;
-            font-family: Helvetica, sans-serif;
-            font-weight: 300;
-            font-size: 25px;
+            margin-bottom: 0.5em;
+            margin-top: 0.5em;
+            font-family: 'Playfair Display SC', serif;
+            font-weight: 700;
             line-height: 1.5em;
+            position: absolute;
+        }
+        
+        p {
+            min-width: 30%;
+            text-align: left;
+            margin-left: 30%;
+            margin-right: 30%;
+            margin-top: 25%;
+            font-family: 'Spectral', serif;
+            font-weight: 300;
+            color: #666666;
+            font-size: 17px;
+            line-height: 1.5em;
+            position: absolute;
+        }
+        
+        strong {
+            color: #FFAAAA;
+            letter-spacing: -0.1em;
+        }
+        
+        i {
+            color: #AAAAFF
+        }
+        
+        #hr {
+            border: 0.5pt #333333;
+            height: 0pt;
+            border-radius: 40%;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+        
+        @-webkit-keyframes normalclocksecond1
+        /* Safari and Chrome */
+        
+        {
+            from {
+                -webkit-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes normalclocksecond1 {
+            from {
+                -ms-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -webkit-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+                -webkit-transform-origin: bottom;
+                -moz-transform-origin: bottom;
+                -ms-transform-origin: bottom;
+                -o-transform-origin: bottom;
+                transform-origin: bottom;
+            }
+            to {
+                -ms-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -webkit-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+                -webkit-transform-origin: bottom;
+                -moz-transform-origin: bottom;
+                -ms-transform-origin: bottom;
+                -o-transform-origin: bottom;
+                transform-origin: bottom;
+            }
+        }
+        
+        @-webkit-keyframes slowclocksecond1
+        /* Safari and Chrome */
+        
+        {
+            from {
+                -webkit-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+                -webkit-transform-origin: bottom;
+                -moz-transform-origin: bottom;
+                -ms-transform-origin: bottom;
+                -o-transform-origin: bottom;
+                transform-origin: bottom;
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+                -webkit-transform-origin: bottom;
+                -moz-transform-origin: bottom;
+                -ms-transform-origin: bottom;
+                -o-transform-origin: bottom;
+                transform-origin: bottom;
+            }
+        }
+        
+        @keyframes slowclocksecond1 {
+            from {
+                -ms-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -webkit-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+                -webkit-transform-origin: bottom;
+                -moz-transform-origin: bottom;
+                -ms-transform-origin: bottom;
+                -o-transform-origin: bottom;
+                transform-origin: bottom;
+            }
+            to {
+                -ms-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -webkit-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+                -webkit-transform-origin: bottom;
+                -moz-transform-origin: bottom;
+                -ms-transform-origin: bottom;
+                -o-transform-origin: bottom;
+                transform-origin: bottom;
+            }
+        }
+        
+        #normalclocksecond {
+            height: 80px;
+            border: 1pt solid #FFAAAA;
+            margin-left: 250px;
+            margin-right: auto;
+            margin-top: 70px;
+            float: left;
+            position: absolute;
+            animation: normalclocksecond1 infinite;
+            animation-duration: 60s;
+            animation-timing-function: linear;
+        }
+        
+        #slowclocksecond {
+            height: 95px;
+            width: 0px;
+            border: 1pt solid #AAAAFF;
+            margin-left: 250px;
+            margin-right: auto;
+            margin-top: 55px;
+            float: left;
+            position: absolute;
+            animation: slowclocksecond1 infinite;
+            animation-duration: 180s;
+            animation-timing-function: linear;
+        }
+        
+        #normalclock {
+            width: 200px;
+            height: 200px;
+            border: 2pt solid #000000;
+            border-radius: 50%;
+            margin-left: 150px;
+            margin-right: 5%;
+            margin-top: 50px;
+            float: left;
+            position: absolute;
+        }
+        
+        #normalclock2 {
+            width: 200px;
+            height: 200px;
+            border: 2pt solid #666666;
+            border-radius: 50%;
+            margin-left: 50px;
+            margin-right: 5%;
+            margin-top: 50px;
+            float: left;
+            position: absolute;
+        }
+        
+        #slowclock {
+            width: 200px;
+            height: 200px;
+            border: 2pt solid #666666;
+            border-radius: 50%;
+            margin-left: 500px;
+            margin-right: auto;
+            margin-top: 50px;
+            float: left;
+            position: absolute;
+        }
+        
+        #dummyclock {
+            width: 150px;
+            height: 150px;
+            border: 1pt solid black;
+            border-radius: 50%;
+            margin-left: 5%;
+            margin-right: 5%;
+            margin-top: 10px;
+            float: left;
+            position: relative;
+        }
+        
+        #dummyclock2 {
+            width: 100px;
+            height: 100px;
+            border: 1pt solid black;
+            border-radius: 50%;
+            margin-left: 5%;
+            margin-right: 5%;
+            margin-top: 100px;
+            float: left;
+            position: relative;
+        }
+        
+        #dummyclock3 {
+            width: 300px;
+            height: 300px;
+            border: 1pt solid black;
+            border-radius: 50%;
+            margin-left: 14%;
+            margin-right: 5%;
+            margin-top: 75px;
+            float: left;
+            position: relative;
+        }
+        
+        #bg {
+            width: 100%;
+            height: 250px;
+            float: left;
+            position: relative;
         }
     </style>
 </head>
 
 <body>
+    <script type="text/javascript">
+        //disable scroll
+        function noScroll() {
+            window.scrollTo(0, 0);
+        }
+        window.addEventListener('scroll', noScroll);
+        //p5.js
+        let capture;
 
-    <img src="assets/logo.svg" width="15%" height="15%">
-    <br>
-    <p> Universe of Seungyoon Yu<br>Being in Creation</p>
+        function setup() {
+            let cnv = createCanvas(300, 300);
+            cnv.parent("dummyclock3")
+            background(255);
+            cnv.position(0, 0);
+            capture = createCapture(VIDEO);
+            capture.size(400, 300);
+
+        }
+
+        function draw() {
+            var img = image(capture, 0, 0, 400, 300);
+            if (페이지 로드 후 90 초가 지날 때까지와 100 초 이후) {
+                filter(THRESHOLD)
+            }
+            if (페이지 로드 후 90 초가 지난 후부터 10 초동안) {
+                img = image(capture, 0, 0, 400, 300);
+            }
+        }
+
+        //  function dimension() {
+        //     draw;
+        //     filter(THRESHOLD);
+        //     var timer = null;
+        //     timer = setInterval(draw, 4000);
+        // }
+    </script>
+    <div id="dummyclock"></div>
+    <div id="dummyclock2"></div>
+    <div id="dummyclock3"></div>
+    <div id="dummyclock3"></div>
+    <div id="dummyclock2"></div>
+    <div id="dummyclock3"></div>
+    <div id="dummyclock"></div>
+    <div id="dummyclock2"></div>
+    <div id="dummyclock3"></div>
+    <div id="dummyclock2"></div>
+    <div id="dummyclock"></div>
+    <div id="dummyclock3"></div>
+    <div id="normalclock"></div>
+    <div id="normalclocksecond"></div>
+    <div id="slowclocksecond"></div>
+    <header><img src=assets/langweile_logo.gif></header>
+
+    <p>Each person has different time axis. When the <strong>GMT</strong> approximates <i>one's time axis</i>, one can live in "real world".</p>
+    <br><br><br><br>
+    <p><a href="assets/langweile_docu.pdf" target="_blank">more description »</a> <br> <a href="mailto:connect.seyu@gmail.com">contact Seungyoon Yu »</a></p>
+
+
+
+
+
+    <br><br>
+
+
+
+    </div>
 </body>
 
 </html>
