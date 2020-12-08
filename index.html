@@ -373,18 +373,20 @@
 
         function draw() {
             var img = image(capture, 0, 0, 400, 300);
-            var check = (new Date().getTime() - start) / 1000;
-            var check_trigger = 0;
+            //  alert(check + " , " + new Date().getTime());
+            var check = (new Date().getTime() - start);
+
             if (event_trigger == 0) {
                 filter(THRESHOLD);
             }
 
-            if (check % 20 == 0 && event_trigger == 0) {
+            if (check % 20 == 0 && event_trigger == 0 * 1000) {
                 start = new Date().getTime();
                 event_trigger = 1;
-            } else if (check % 10 == 0 && event_trigger == 1) {
+            } else if (check % 10 == 1 && event_trigger == 1) {
                 start = new Date().getTime();
                 event_trigger = 0;
+
             }
         }
 
