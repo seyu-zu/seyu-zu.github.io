@@ -347,7 +347,7 @@
 </head>
 
 <body>
-    <audio src="assets/beep.mp3" id="beep"></audio>
+    <audio src="beep.mp3" id="beep"></audio>
     <script type="text/javascript">
         // check start time for event
         var start = new Date().getTime();
@@ -360,6 +360,9 @@
         window.addEventListener('scroll', noScroll);
         //p5.js Library + js
         let capture;
+        let img;
+        var filter_trigger = 1;
+        var inv = 10;
 
         function setup() {
             let cnv = createCanvas(300, 300);
@@ -371,29 +374,21 @@
             capture.hide();
         }
 
+
+
         function draw() {
             var img = image(capture, 0, 0, 400, 300);
-            var check = parseInt((new Date().getTime() - start) / 1000 + 0.5);
-
-            if (event_trigger == 0) {
-                filter(THRESHOLD);
-            }
-
-            if (check % 20 < 1 && event_trigger == 0 * 1000) {
-                start = new Date().getTime();
-                event_trigger = 1;
-                document.getElementById("beep").play();
-            } else if (check % 10 < 1 && event_trigger == 1) {
-                start = new Date().getTime();
-                event_trigger = 0;
-                document.getElementById("beep").play();
-
+            if (filter_trigger % inv != 0) {
+                filter(THRESHOLD); // 켜져있다. 90초유지 . 꺼지고 10초유지
+            } else {
+                filter_trigger = 0;
+                inv = 9;
             }
         }
 
-        setTimeout(function() {
-
-        }, 1000)
+        setInterval(function() {
+            filter_trigger++;
+        }, 10000)
     </script>
     <div id="dummyclock"></div>
     <div id="normalclock"></div>
