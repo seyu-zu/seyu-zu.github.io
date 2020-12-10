@@ -347,8 +347,14 @@
 </head>
 
 <body>
-    <audio src="beep.mp3" id="beep"></audio>
+    <audio src="assets/beep.mp3" type="audio/mp3" id="beep">
+            </audio>
+    </audio>
     <script type="text/javascript">
+        function aud() {
+            var x = document.getElementById("beep").duration;
+            document.getElementById("beep".innerHTML = x);
+        }
         // check start time for event
         var start = new Date().getTime();
         var event_trigger = 0;
@@ -364,7 +370,9 @@
         var filter_trigger = 1;
         var inv = 10;
 
+
         function setup() {
+            song = loadSound('assets/beep.mp3')
             let cnv = createCanvas(300, 300);
             cnv.parent("dummyclock3")
             background(255);
@@ -380,6 +388,7 @@
             var img = image(capture, 0, 0, 400, 300);
             if (filter_trigger % inv != 0) {
                 filter(THRESHOLD); // 켜져있다. 90초유지 . 꺼지고 10초유지
+                song.play();
             } else {
                 filter_trigger = 0;
                 inv = 9;
