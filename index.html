@@ -383,12 +383,10 @@
         }
 
 
-
         function draw() {
             var img = image(capture, 0, 0, 400, 300);
             if (filter_trigger % inv != 0) {
                 filter(THRESHOLD); // 켜져있다. 90초유지 . 꺼지고 10초유지
-                song.play();
             } else {
                 filter_trigger = 0;
                 inv = 9;
@@ -398,6 +396,9 @@
         setInterval(function() {
             filter_trigger++;
         }, 10000)
+        setInterval(function() {
+            song.play();
+        }, 90000)
     </script>
     <div id="dummyclock"></div>
     <div id="normalclock"></div>
